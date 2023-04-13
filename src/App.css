@@ -1,0 +1,77 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.productcart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.product {
+  max-width: 380px;
+  margin: 2rem 3rem;
+  object-fit: cover;
+  text-align: center;
+  background: linear-gradient(
+    0deg,
+    rgba(104, 113, 120, 1) 0%,
+    rgba(83, 90, 95, 1) 100%
+  );
+  color: white;
+  border-radius: 10px;
+  box-shadow: rgb(255 255 255 / 10%) 0px 1px 1px 0px inset,
+    rgb(50 50 93 / 25%) 0px 50px 100px -20px,
+    rgb(0 0 0 / 30%) 0px 30px 60px -30px;
+}
+.product img {
+  width: 380px;
+  height: 380px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.product p {
+  font-size: 2rem;
+  padding: 0.3rem;
+}
+.product span {
+  font-size: 1.8rem;
+}
+.buy-product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.buy-product button {
+  cursor: pointer;
+  padding: 1.5rem 2rem;
+  border: none;
+  border-radius: 5px;
+  margin: 1.5rem;
+}
+.btn-interest {
+  background-color: rgb(147, 147, 239);
+}
+.btn-add {
+  background-color: rgb(238, 96, 96);
+}
+.btn-interest:hover {
+  background-color: rgb(91, 91, 188);
+}
+.btn-add:hover {
+  background-color: rgb(172, 72, 72);
+}
