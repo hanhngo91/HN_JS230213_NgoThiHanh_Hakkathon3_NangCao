@@ -171,7 +171,7 @@ function App() {
     },
   ]);
 
-  const [total, setTotal] = useState(127000000000);
+  const [total, setTotal] = useState(128000000000);
   const [sumBuy, setSumbuy] = useState(0);
   const [cartItems, setCartItems] = useState([]);
 
@@ -185,56 +185,7 @@ function App() {
       if (number >= 0) {
         number++;
         totalsum = totalsum - price;
-        buy = sumBuy - price;
-        setProducts((products[id - 1].quantity = number));
-        setProducts(() =>
-          products.map((product) =>
-            product.id == id ? { ...product, quantity: number } : product
-          )
-        );
-        setTotal(totalsum);
-        if (cartItems.length == 0) {
-          let item = {
-            id: id,
-            title: products[id - 1].title,
-            quantity: number,
-          };
-          // console.log(item);
-          console.log("bbb");
-          setCartItems([item]);
-        } else {
-          let itemId = cartItems.find((e) => e.id == id);
-          console.log(itemId);
-          if (itemId) {
-            setCartItems(() =>
-              cartItems.map((item) =>
-                item.id == id ? { ...item, quantity: number } : item
-              )
-            );
-            console.log("cccc");
-          }
-          if (!itemId) {
-            let item = {
-              id: id,
-              title: products[id - 1].title,
-              quantity: number,
-            };
-            console.log("aaa");
-            setCartItems([...cartItems, item]);
-          }
-        }
-      }
-    }
-    //--
-    if (event.target.classList.contains("btn-interest")) {
-      let id = Number(event.target.id);
-      let number = products[id - 1].quantity;
-      let price = products[id - 1].price;
-      let totalsum = total;
-      // console.log(number, price, totalsum);
-      if (number > 0) {
-        number--;
-        totalsum = totalsum + price;
+        buy = sumBuy + price;
         setProducts((products[id - 1].quantity = number));
         setProducts(() =>
           products.map((product) =>
@@ -248,9 +199,61 @@ function App() {
             id: id,
             title: products[id - 1].title,
             quantity: number,
+            price: products[id - 1].price,
+          };
+
+          setCartItems([item]);
+        } else {
+          let itemId = cartItems.find((e) => e.id == id);
+          if (itemId) {
+            setCartItems(() =>
+              cartItems.map((item) =>
+                item.id == id ? { ...item, quantity: number } : item
+              )
+            );
+          }
+          if (!itemId) {
+            let item = {
+              id: id,
+              title: products[id - 1].title,
+              quantity: number,
+              price: products[id - 1].price,
+            };
+
+            setCartItems([...cartItems, item]);
+          }
+        }
+      }
+    }
+    //--
+    if (event.target.classList.contains("btn-interest")) {
+      let id = Number(event.target.id);
+      let number = products[id - 1].quantity;
+      let price = products[id - 1].price;
+      let totalsum = total;
+      let buy = sumBuy;
+
+      if (number > 0) {
+        number--;
+        totalsum = totalsum + price;
+        buy = sumBuy - price;
+        setProducts((products[id - 1].quantity = number));
+        setProducts(() =>
+          products.map((product) =>
+            product.id == id ? { ...product, quantity: number } : product
+          )
+        );
+        setTotal(totalsum);
+        setSumbuy(buy);
+        if (cartItems.length == 0) {
+          let item = {
+            id: id,
+            title: products[id - 1].title,
+            quantity: number,
+            price: products[id - 1].price,
           };
           // console.log(item);
-          console.log("bbb");
+
           setCartItems([item]);
         } else {
           let itemId = cartItems.find((e) => e.id == id);
@@ -262,9 +265,8 @@ function App() {
                   item.id == id ? { ...item, quantity: number } : item
                 )
               );
-              console.log("cccc");
-            } else if (itemId.quantity == 0) {
-              console.log("dddd");
+            }
+            if (itemId.quantity == 1) {
               setCartItems(() =>
                 cartItems.map((item, i) =>
                   item.id == id ? cartItems.splice(i, 1) : item
@@ -277,8 +279,9 @@ function App() {
               id: id,
               title: products[id - 1].title,
               quantity: number,
+              price: products[id - 1].price,
             };
-            console.log("aaa");
+
             setCartItems([...cartItems, item]);
           }
         }
@@ -287,13 +290,85 @@ function App() {
     }
   };
 
+  const handleReset = () => {
+    setCartItems([]);
+    setSumbuy(0);
+    setProducts(() =>
+      products.map((product) =>
+        product ? { ...product, quantity: 0 } : product
+      )
+    );
+    setTotal(128000000000);
+  };
+
+  const handleAdjustQuantity = (event) => {
+    if (event.target.classList.contains("btn-cong")) {
+      let id = Number(event.target.id);
+      let itemId = cartItems.find((e) => e.id == id);
+      let quantity = itemId.quantity;
+      let sumBuy1 = sumBuy;
+      if (quantity >= 0) {
+        quantity++;
+        sumBuy1 = sumBuy1 + itemId.price;
+        setCartItems(() =>
+          cartItems.map((item) =>
+            item.id == id ? { ...item, quantity: quantity } : item
+          )
+        );
+        setProducts(() =>
+          products.map((product) =>
+            product.id == id ? { ...product, quantity: quantity } : product
+          )
+        );
+        setSumbuy(sumBuy1);
+      }
+      console.log(sumBuy1);
+    }
+    if (event.target.classList.contains("btn-tru")) {
+      let id = Number(event.target.id);
+      let itemId = cartItems.find((e) => e.id == id);
+      let sumBuy1 = sumBuy;
+      let quantity = itemId.quantity;
+      if (quantity > 0) {
+        quantity--;
+        sumBuy1 = sumBuy1 - itemId.price;
+        setCartItems(() =>
+          cartItems.map((item) =>
+            item.id == id ? { ...item, quantity: quantity } : item
+          )
+        );
+        setProducts(() =>
+          products.map((product) =>
+            product.id == id ? { ...product, quantity: quantity } : product
+          )
+        );
+
+        setSumbuy(sumBuy1);
+      }
+      if (quantity == 0) {
+        setCartItems(() =>
+          cartItems.map((item, i) =>
+            item.id == id ? cartItems.splice(i, 1) : item
+          )
+        );
+      }
+    }
+  };
+
   return (
     <div className="App">
-      <div>To spent ${total.toLocaleString()} you have a lot of money!</div>
+      <div className="header">
+        To spent ${total.toLocaleString()} you have a lot of money!
+      </div>
       <div className="productcart" onClick={handleClick}>
         <Product products={products}></Product>
       </div>
-      <ShoppingCart cartItems={cartItems} sumBuy={sumBuy} />
+      <ShoppingCart
+        cartItems={cartItems}
+        sumBuy={sumBuy}
+        handleReset={handleReset}
+        handleAdjustQuantity={handleAdjustQuantity}
+      />
     </div>
   );
 }

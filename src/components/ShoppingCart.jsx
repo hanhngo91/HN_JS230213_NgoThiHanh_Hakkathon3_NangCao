@@ -1,21 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import CartItem from "./CartItem";
+import "./Style_ShoppingCart.css";
 
 export default function ShoppingCart(props) {
-  let sumBuy = props.sumBuy;
-  let cartItems = props.cartItems;
-  const total = cartItems.reduce((acc, item) => acc + item.price, 0);
+  let { sumBuy, cartItems, handleReset, handleAdjustQuantity } = props;
   return (
     <div className="cart">
-      <h2>Shopping_Cart</h2>
-      <div className="cart-item">
+      <h2>Your Cart</h2>
+      <ul
+        style={{ listStyleType: "none" }}
+        className="cart-item"
+        onClick={handleAdjustQuantity}
+      >
         {cartItems.length != 0
           ? cartItems.map((item, i) => (
-              <CartItem key={i} name={item.title} quantity={item.quantity} />
+              <li>
+                <CartItem
+                  key={i}
+                  name={item.title}
+                  quantity={item.quantity}
+                  id={item.id}
+                />
+              </li>
             ))
           : ""}
+      </ul>
+      <div>
+        <span className="total">Total: ${sumBuy.toLocaleString()}</span>
+        <button className="btnReset" onClick={handleReset}>
+          Reset Cart
+        </button>
       </div>
-      <h3>Total: ${sumBuy.toLocaleString()}</h3>
     </div>
   );
 }

@@ -1,0 +1,12 @@
+.total{
+    font-weight: 800;
+}
+.cart .btnReset{
+    background-color: rgb(224, 166, 166);
+    border: none;
+    cursor: pointer;
+    margin-left: 2rem;
+}
+.cart .btnReset:hover{
+    background-color: rgb(231, 114, 114);
+}

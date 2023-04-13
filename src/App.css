@@ -4,6 +4,12 @@
   padding: 2rem;
   text-align: center;
 }
+.App .header{
+  padding: 0.5rem 0;
+  font-size: 1.5rem;
+  color: white;
+  background-color: rgb(199, 112, 112);
+}
 
 
 .card {
@@ -22,34 +28,31 @@
 }
 
 .product {
-  max-width: 380px;
+ width: 20rem;
   margin: 2rem 3rem;
   object-fit: cover;
   text-align: center;
-  background: linear-gradient(
-    0deg,
-    rgba(104, 113, 120, 1) 0%,
-    rgba(83, 90, 95, 1) 100%
-  );
-  color: white;
+  background: white;
   border-radius: 10px;
   box-shadow: rgb(255 255 255 / 10%) 0px 1px 1px 0px inset,
     rgb(50 50 93 / 25%) 0px 50px 100px -20px,
     rgb(0 0 0 / 30%) 0px 30px 60px -30px;
 }
 .product img {
-  width: 380px;
-  height: 380px;
+  margin-top: 1rem;
+  width: 170px;
+  height: 250px;
   object-fit: cover;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 .product p {
-  font-size: 2rem;
+  font-weight: 700;
+  font-size: 1.5rem;
   padding: 0.3rem;
 }
 .product span {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 .buy-product {
   display: flex;
@@ -64,14 +67,20 @@
   margin: 1.5rem;
 }
 .btn-interest {
-  background-color: rgb(147, 147, 239);
-}
-.btn-add {
-  background-color: rgb(238, 96, 96);
+  width: 7rem;
+  height: 4rem;
+  font-size: 1rem;
+  background-color: rgb(223, 207, 193);
 }
 .btn-interest:hover {
-  background-color: rgb(91, 91, 188);
+  background-color: rgb(219, 132, 69);
+}
+.btn-add {
+  width: 7rem;
+  height: 4rem;
+  font-size: 1rem;
+  background-color: rgb(238, 96, 96);
 }
 .btn-add:hover {
-  background-color: rgb(172, 72, 72);
+  background-color: rgb(217, 51, 51);
 }
